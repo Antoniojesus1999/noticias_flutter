@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noticias_flutter/src/pages/tab1_page.dart';
+import 'package:noticias_flutter/src/pages/tab2_page.dart';
 import 'package:provider/provider.dart';
 
 class TabsPageScreen extends StatelessWidget {
@@ -50,11 +51,9 @@ class Paginas extends StatelessWidget {
       //Comportamiento de la pagina al mover hacia los lados para que cambie a encabezados o parati
       //physics: BouncingScrollPhysics(),
       physics: const NeverScrollableScrollPhysics(),
-      children: [
+      children: const [
         Tab1Page(),
-        Container(
-          color: Colors.blue,
-        )
+        Tab2Page(),
       ],
     );
   }
