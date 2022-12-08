@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noticias_flutter/src/pages/tab1_page.dart';
 import 'package:provider/provider.dart';
 
 class TabsPageScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class TabsPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => new _NavegacionModel(),
+        create: (_) => _NavegacionModel(),
         child: const Scaffold(
           body: Paginas(),
           bottomNavigationBar: _Navegacion(),
@@ -23,6 +24,7 @@ class _Navegacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final navegacionModel = Provider.of<_NavegacionModel>(context);
+
     return BottomNavigationBar(
       currentIndex: navegacionModel._paginaActual,
       onTap: (i) => navegacionModel.paginaActual = i,
@@ -49,9 +51,7 @@ class Paginas extends StatelessWidget {
       //physics: BouncingScrollPhysics(),
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        Container(
-          color: Colors.red,
-        ),
+        Tab1Page(),
         Container(
           color: Colors.blue,
         )
@@ -62,14 +62,14 @@ class Paginas extends StatelessWidget {
 
 class _NavegacionModel extends ChangeNotifier {
   int _paginaActual = 0;
-  PageController _pageController = new PageController();
+  final PageController _pageController = PageController();
 
   int get patinaActual => _paginaActual;
 
   set paginaActual(int valor) {
     _paginaActual = valor;
     _pageController.animateToPage(valor,
-        duration: Duration(milliseconds: 200), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 200), curve: Curves.easeOut);
     notifyListeners();
   }
 }
