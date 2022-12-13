@@ -14,7 +14,7 @@ class NewsService with ChangeNotifier {
     Category(FontAwesomeIcons.building, 'business'),
     Category(FontAwesomeIcons.tv, 'entertainment'),
     Category(FontAwesomeIcons.addressCard, 'general'),
-    Category(FontAwesomeIcons.headSideVirus, 'healt'),
+    Category(FontAwesomeIcons.headSideVirus, 'health'),
     Category(FontAwesomeIcons.vials, 'science'),
     Category(FontAwesomeIcons.volleyball, 'sports'),
     Category(FontAwesomeIcons.memory, 'technology'),
@@ -58,4 +58,7 @@ class NewsService with ChangeNotifier {
     categoryArticles[category]!.addAll(newsResponse.articles);
     notifyListeners();
   }
+
+  List<Article>? get getArticulosCategoriaSeleccionada =>
+      categoryArticles[selectedCategory];
 }

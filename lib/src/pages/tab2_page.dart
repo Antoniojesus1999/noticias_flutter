@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noticias_flutter/src/models/categroy_model.dart';
 import 'package:noticias_flutter/src/theme/tema.dart';
+import 'package:noticias_flutter/src/whidgets/lista_noticias.dart';
 import 'package:provider/provider.dart';
 
 import '../services/news_service.dart';
@@ -10,12 +11,14 @@ class Tab2Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final newsService = Provider.of<NewsService>(context);
     return SafeArea(
         child: Scaffold(
       body: Column(
-        children: const [
+        children: [
+          const _ListaCategorias(),
           Expanded(
-            child: _ListaCategorias(),
+            child: ListaNoticias(newsService.getArticulosCategoriaSeleccionada),
           )
         ],
       ),
@@ -31,27 +34,31 @@ class _ListaCategorias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = Provider.of<NewsService>(context).categories;
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      itemCount: categories.length,
-      itemBuilder: (context, index) {
-        final cName = categories[index].name;
-        return Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              _CategoryButton(
-                categories[index],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text('${cName[0].toUpperCase() + cName.substring(1)}')
-            ],
-          ),
-        );
-      },
+    return SizedBox(
+      height: 80,
+      width: double.infinity,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          final cName = categories[index].name;
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                _CategoryButton(
+                  categories[index],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text('${cName[0].toUpperCase() + cName.substring(1)}')
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

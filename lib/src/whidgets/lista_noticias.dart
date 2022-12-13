@@ -4,16 +4,16 @@ import 'package:noticias_flutter/src/theme/tema.dart';
 import '../models/newResponseModel.dart';
 
 class ListaNoticias extends StatelessWidget {
-  final List<Article> noticias;
+  final List<Article>? noticias;
 
   const ListaNoticias(this.noticias, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: noticias.length,
+      itemCount: noticias?.length,
       itemBuilder: (context, index) {
-        return _Noticia(index: index, noticia: noticias[index]);
+        return _Noticia(index: index, noticia: noticias![index]);
       },
     );
   }
